@@ -4,6 +4,7 @@ import Navbar from './core/components/Navbar';
 import Admin from './pages/Admin';
 import Catalog from './pages/Catalog';
 import Home from './pages/Home';
+import ProductDetails from './pages/Catalog/components/ProductDetails';
 
 const Routes = () => (
 
@@ -17,10 +18,14 @@ const Routes = () => (
                 <Home />
             </Route>
             
-            <Route path="/catalog"> 
+            <Route path="/products" exact> 
                 <Catalog />
             </Route>
-            
+
+            <Route path="/products/:productId"> 
+                <ProductDetails />
+            </Route>
+
             <Route path="/admin">
                 <Admin />
             </Route>
