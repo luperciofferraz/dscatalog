@@ -1,3 +1,4 @@
+import { makeRequest } from 'core/utils/request';
 import React, { useState } from 'react';
 import BaseForm from '../../BaseForm';
 import './styles.scss';
@@ -7,8 +8,11 @@ type FormState = {
     name: string;
     price: string;
     category: string;
+    description: string;
 
 }
+
+type FormEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
 
 const Form = () => {
 
@@ -16,11 +20,12 @@ const Form = () => {
 
         name: '',
         price: '',
-        category: ''
+        category: '',
+        description: ''
 
     });
 
-    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleOnChange = (event: FormEvent) => {
         
         const name = event.target.name;
         const value = event.target.value;
@@ -32,7 +37,18 @@ const Form = () => {
      const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        console.log(formData);
+        const payload = {
+
+            ...formData,
+            imgUrl: 'https://images-americanas.b2w.io/produtos/01/00/item/116779/9/116779925_1GG.jpg',
+            categories: [{ id: formData.category }]
+
+        }
+
+        makeRequest({ url: '/products', method: 'POST', data: payload }).then(() => {
+
+            setFormData({ name: '', category: '', price: '', description: ''});
+        });
      }
 
     return (
@@ -53,9 +69,9 @@ const Form = () => {
                         />
                         
                         <select name="category" value={formData.category} className="form-control mb-5" onChange={handleOnChange}>
-                            <option value="livros">Livros</option>
-                            <option value="computadores">Computadores</option>
-                            <option value="eletronicos">Eletrônicos</option>
+                            <option value="1">Livros</option>
+                            <option value="3">Computadores</option>
+                            <option value="2">Eletrônicos</option>
                         </select>
 
                         <input 
@@ -66,6 +82,21 @@ const Form = () => {
                             onChange={handleOnChange}
                             placeholder="Preço"
                         />
+
+                    </div>
+                    <div className="col6">
+                        
+                        <textarea 
+                            name="description" 
+                            value={formData.description}
+                            id="description" 
+                            cols={30} 
+                            rows={10}
+                            onChange={handleOnChange}
+                            className="form-control"
+                        >
+
+                        </textarea>
 
                     </div>
                 </div>
