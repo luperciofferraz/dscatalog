@@ -1,17 +1,26 @@
 import axios, { Method } from 'axios';
+import qs from 'qs';
+import { CLIENT_ID, CLIENT_SECRET } from './auth';
 
 type RequestParams = {
 
     method?: Method;
     url: string;
-    data?: object;
+    data?: object | string;
     params?: object;
+    headers?: object;
 
 }
 
-const BASE_URL = 'http://localhost:3000';
+type LoginData = {
 
-export const makeRequest = ( { method = 'GET', url, data, params }: RequestParams ) => {
+    username: string;
+    password: string;
+}
+
+const BASE_URL = 'http://localhost:8080';
+
+export const makeRequest = ( { method = 'GET', url, data, params, headers }: RequestParams ) => {
 
     return axios({
 
@@ -21,8 +30,29 @@ export const makeRequest = ( { method = 'GET', url, data, params }: RequestParam
 
         data, 
 
-        params
+        params,
+
+        headers
 
     })
 
+}
+
+export const makeLogin = (loginData: LoginData) => {
+
+    const token = `${CLIENT_ID}:${CLIENT_SECRET}`;
+
+    const headers = {
+
+        Authorization: `Basic ${window.btoa(token)}`,
+        'Content-Type': 'application/x-www-form-urlencoded'
+
+    }
+
+    //Caso não use a biblioteca QS
+    //const payload = `username=${loginData.username}&password=${loginData.password}&grant_type=password`;
+    
+    const payload = qs.stringify({ ...loginData, grant_type: 'password' })
+
+    return makeRequest({ method: 'POST', url: '/oauth/token', data: payload, headers });
 }

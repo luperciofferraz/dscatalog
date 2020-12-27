@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import AuthCard from '../Card';
 import './styles.scss';
+import { makeLogin } from 'core/utils/request';
 
 type FormData = {
-    email: string;
+    username: string;
     password: string;
 }
 
@@ -16,6 +17,7 @@ const Login = () => {
 
     const onSubmit = (data: FormData) => {
         console.log(data);
+        makeLogin(data);
     }
 
     return (
@@ -27,7 +29,7 @@ const Login = () => {
                 <input 
                     type="email"
                     ref={register}
-                    name="email" 
+                    name="username" 
                     className="form-control input-base margin-botton-30" 
                     placeholder="Email"
                 />
