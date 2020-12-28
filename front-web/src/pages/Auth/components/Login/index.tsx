@@ -1,5 +1,5 @@
 import ButtonIcon from 'core/components/ButtonIcon';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import AuthCard from '../Card';
@@ -15,20 +15,39 @@ const Login = () => {
 
     const { register, handleSubmit } = useForm<FormData>();
 
+    const [hasError, setHasError] = useState(false);
+
     const onSubmit = (data: FormData) => {
-        console.log(data);
-        makeLogin(data);
+        makeLogin(data)
+            .then(response => {
+                setHasError(false);
+            })
+            .catch( () => {
+                setHasError(true);
+            })
     }
 
     return (
 
         <AuthCard title="login" >
             
+            {hasError && (
+
+                <div className="alert alert-danger">
+
+                    Usuário ou senha inválidos!
+
+                </div>
+
+            )}
+            
             <form onSubmit={handleSubmit(onSubmit)} className="login-form">
 
                 <input 
                     type="email"
-                    ref={register}
+                    ref={register({
+                        required: true
+                    })}
                     name="username" 
                     className="form-control input-base margin-botton-30" 
                     placeholder="Email"
@@ -36,7 +55,9 @@ const Login = () => {
 
                 <input 
                     type="password" 
-                    ref={register}
+                    ref={register({
+                        required: true
+                    })}
                     name="password"
                     className="form-control input-base" 
                     placeholder="Senha"
