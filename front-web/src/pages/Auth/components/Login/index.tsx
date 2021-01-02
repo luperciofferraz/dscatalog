@@ -14,7 +14,7 @@ type FormData = {
 
 const Login = () => {
 
-    const { register, handleSubmit } = useForm<FormData>();
+    const { register, handleSubmit, errors } = useForm<FormData>();
 
     const [hasError, setHasError] = useState(false);
 
@@ -48,25 +48,54 @@ const Login = () => {
             
             <form onSubmit={handleSubmit(onSubmit)} className="login-form">
 
-                <input 
-                    type="email"
-                    ref={register({
-                        required: true
-                    })}
-                    name="username" 
-                    className="form-control input-base margin-botton-30" 
-                    placeholder="Email"
-                />
+                <div className="margin-botton-30">
+                   
+                    <input 
+                        type="email"
+                        className={`form-control input-base ${errors.username ? 'is-invalid' : ''} `} 
+                        placeholder="Email"
+                        name="username" 
+                        ref={register({
+                            required: "Campo obrigatório",
+                            pattern: {
+                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                              message: "Email inválido"
+                            }
+                        })}
+                    />
 
-                <input 
-                    type="password" 
-                    ref={register({
-                        required: true
-                    })}
-                    name="password"
-                    className="form-control input-base" 
-                    placeholder="Senha"
-                />
+                    {errors.username && (
+                    
+                        <div className="invalid-feedback d-block">
+                            {errors.username.message}
+                        </div>
+
+                    ) }
+
+                </div>
+
+                <div className="margin-botton-30">
+
+                    <input 
+                        type="password" 
+                        className={`form-control input-base ${errors.password ? 'is-invalid' : ''} `} 
+                        placeholder="Senha"
+                        name="password"
+                        ref={register({
+                            required: "Campo obrigatório"
+                        })}
+                    />
+
+                    {errors.password && (
+                    
+                        <div className="invalid-feedback d-block">
+                            {errors.password.message}
+                        </div>
+                    
+                    )}
+
+                </div>
+
 
                 <Link to="/admin/auth/recover" className="login-link-recover">
                     Esqueci a senha?
