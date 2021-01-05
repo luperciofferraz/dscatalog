@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
+import { isAuthenticated } from 'core/utils/auth';
   
 type Props = {
 
@@ -9,8 +10,6 @@ type Props = {
 
 const PrivateRoute = ({ children, path }: Props) => {
     
-    const isAuthenticated = true;
-    
     return (
     
         <Route
@@ -19,7 +18,7 @@ const PrivateRoute = ({ children, path }: Props) => {
             
             render={({ location }) =>
                 
-                isAuthenticated ? (
+                isAuthenticated() ? (
                 
                 children
                 
