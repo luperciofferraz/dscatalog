@@ -19,17 +19,19 @@ const Navbar = () => (
                         HOME
                     </NavLink>
                 </li>
+
                 <li>
                     <NavLink to="/products" >
                         CATÁLOGO
                     </NavLink>
                  </li>   
-                 <li>
+
+                <li>
                     <NavLink to="/admin" >
                         ADMIN
                     </NavLink>
                 </li>
-                
+    
             </ul>
         </div>
     </nav>
