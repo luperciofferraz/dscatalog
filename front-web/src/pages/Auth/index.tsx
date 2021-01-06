@@ -28,15 +28,15 @@ const Auth = () => (
 
             <Switch>
                     
-                <Route path="/admin/auth/login" >
+                <Route path="/auth/login" >
                     <Login />
                 </Route>
                 
-                <Route path="/admin/auth/register"> 
+                <Route path="/auth/register"> 
                     <Register />
                 </Route>
 
-                <Route path="/admin/auth/recover"> 
+                <Route path="/auth/recover"> 
                     <Recover />
                 </Route>
 
