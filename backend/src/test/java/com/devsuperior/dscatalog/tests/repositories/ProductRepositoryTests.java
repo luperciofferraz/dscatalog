@@ -37,6 +37,16 @@ public class ProductRepositoryTests {
 	}
 	
 	@Test
+	public void findShouldReturnNothingWhenNameDoesNotExist() {
+
+		String name = "Camera";
+		
+		Page<Product> result = repository.find(null, name, pageRequest);
+
+		Assertions.assertTrue(result.isEmpty());
+	}
+	
+	@Test
 	public void findShouldReturnAllProductsWhenNameIsEmpty() {
 
 		String name = "";
