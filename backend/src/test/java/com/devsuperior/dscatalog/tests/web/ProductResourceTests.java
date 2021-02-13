@@ -8,6 +8,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -103,6 +104,65 @@ public class ProductResourceTests {
 		
 	}
 
+	@Test
+	public void deleteShouldReturnNotFoundWhenIdExists() throws Exception {
+		
+		String accessToken = obtainAccessToken(operatorUsername, operatorPassword);
+		
+		ResultActions result = mockMvc.perform(delete("/products/{id}", nonExistingId)
+								.header("Authorization", "Bearer " + accessToken)
+								.accept(MediaType.APPLICATION_JSON));
+
+				result.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void deleteShouldReturnNoContentWhenIdExists() throws Exception {
+		
+		String accessToken = obtainAccessToken(operatorUsername, operatorPassword);
+		
+		ResultActions result = mockMvc.perform(delete("/products/{id}", existingId)
+								.header("Authorization", "Bearer " + accessToken)
+								.accept(MediaType.APPLICATION_JSON));
+
+				result.andExpect(status().isNoContent());
+	}
+	
+	@Test
+	public void insertShouldReturnUnprocessableEntityWhenNegativePrice() throws Exception {
+		
+		String accessToken = obtainAccessToken(operatorUsername, operatorPassword);
+		
+		newProductDTO.setPrice(-10.0);
+		
+		String jsonBody = objectMapper.writeValueAsString(newProductDTO);
+		
+		ResultActions result = mockMvc.perform(post("/products")
+								.header("Authorization", "Bearer " + accessToken)
+								.content(jsonBody)
+								.contentType(MediaType.APPLICATION_JSON)
+								.accept(MediaType.APPLICATION_JSON));
+
+				result.andExpect(status().isUnprocessableEntity());
+	}
+	
+	@Test
+	public void insertShouldReturnCreatedProductWhenValidData() throws Exception {
+		
+		String accessToken = obtainAccessToken(operatorUsername, operatorPassword);
+		
+		String jsonBody = objectMapper.writeValueAsString(newProductDTO);
+		
+		ResultActions result = mockMvc.perform(post("/products")
+								.header("Authorization", "Bearer " + accessToken)
+								.content(jsonBody)
+								.contentType(MediaType.APPLICATION_JSON)
+								.accept(MediaType.APPLICATION_JSON));
+
+				result.andExpect(status().isCreated());
+				result.andExpect(jsonPath("$.id").exists());
+	}
+	
 	@Test
 	public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
 		
