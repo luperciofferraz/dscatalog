@@ -133,6 +133,8 @@ const Form = () => {
                                 getOptionValue={(option: Category) => String(option.id)} 
                                 classNamePrefix="categories-select"
                                 placeholder="Categorias"
+                                inputId="categories"
+                                defaultValue=""
                                 isMulti
                             />
 
