@@ -7,6 +7,7 @@ import BaseForm from '../../BaseForm';
 import './styles.scss';
 import Select from 'react-select'
 import { Category } from 'core/types/Product';
+import ImageUpload from '../ImageUpload';
 
 type FormState = {
 
@@ -173,24 +174,8 @@ const Form = () => {
                         </div>
 
                         <div className="margin-bottom-30">
-
-                            <input  
-                                ref={register({
-                                    required: "Campo obrigatório"
-                                })}
-                                name="imgUrl"
-                                type="text" 
-                                className="form-control input-base"
-                                placeholder="Imagem do Produto"
-                            />
-
-                            {errors.imgUrl && (
                                 
-                                <div className="invalid-feedback d-block">
-                                    {errors.imgUrl.message}
-                                </div>
-
-                            )}
+                            <ImageUpload />
 
                         </div>
 
