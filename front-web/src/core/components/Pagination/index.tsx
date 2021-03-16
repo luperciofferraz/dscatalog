@@ -6,18 +6,17 @@ import ReactPaginate from 'react-paginate';
 type Props = {
 
     totalPages: number;
-    activePage: number;
     onChange: (item: number) => void;
 
 }
 
-const Pagination = ({ totalPages, activePage, onChange }: Props) => {
+const Pagination = ({ totalPages, onChange }: Props) => {
 
-    const renderIcon = () => (
+    const renderIcon = (type: 'previous' | 'next') => (
 
         <ArrowIcon 
-            className={`pagination-previous`} 
-            data-testeid="arrow-icon-previous"
+            className={`pagination-${type}`} 
+            data-testeid={`arrow-icon-${type}`}
         />
 
     )
@@ -29,10 +28,18 @@ const Pagination = ({ totalPages, activePage, onChange }: Props) => {
             <ReactPaginate 
 
                 pageCount={totalPages}
-                pageRangeDisplayed={5}
+                pageRangeDisplayed={3}
                 marginPagesDisplayed={1}
                 onPageChange={selectedItem => onChange(selectedItem.selected)}
-            
+                previousLabel={renderIcon('previous')}
+                nextLabel={renderIcon('next')}
+                containerClassName="pagination"
+                pageLinkClassName="pagination-item"
+                breakClassName="pagination-item"
+                activeLinkClassName="active"
+                previousClassName="page-active"
+                nextClassName="page-active"
+                disabledClassName="page-inactive"            
             />
 
         </div>

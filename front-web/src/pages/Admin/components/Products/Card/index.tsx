@@ -34,7 +34,7 @@ const Card = ({ product, onRemove }: Props) => {
                         
                         {product.categories.map( category => (
                             <span className="badge rounded-pill bg-secondary mr-2">
-                                {category}
+                                {category.name}
                             </span>
                         ))}
                         

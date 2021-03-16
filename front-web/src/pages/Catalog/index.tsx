@@ -20,7 +20,7 @@ const Catalog = () => {
 
         const params = {
             page: activePage,
-            linesPerPage: 12,
+            linesPerPage: 2,
             name,
             categoryId: category?.id
         }
@@ -91,7 +91,6 @@ const Catalog = () => {
             
                 <Pagination 
                     totalPages={productsResponse.totalPages} 
-                    activePage={activePage}
                     onChange={page => setActivePage(page)}
                 />
             )} 
