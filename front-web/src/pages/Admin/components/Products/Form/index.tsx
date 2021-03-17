@@ -8,8 +8,9 @@ import './styles.scss';
 import Select from 'react-select'
 import { Category } from 'core/types/Product';
 import ImageUpload from '../ImageUpload';
+import DescriptionField from './DescriptionField';
 
-type FormState = {
+export type FormState = {
 
     name: string;
     price: string;
@@ -196,21 +197,14 @@ const Form = () => {
                         </div>
 
                     </div>
-                    <div className="col6">
+                    
+                    <div className="col-6">
                         
-                        <textarea 
-                            ref={register({
-                                required: "Campo obrigatório"
-                            })}
-                            name="description" 
-                            id="description" 
-                            cols={30} 
-                            rows={10}
-                            placeholder="Descrição"
-                            className="form-control input-base"
-                        >
-
-                        </textarea>
+                        <DescriptionField 
+                        
+                                control={control}
+                        
+                        />
 
                         {errors.description && (
                         
