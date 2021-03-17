@@ -32,6 +32,9 @@ const Form = () => {
     const { productId } = useParams<ParamsType>(); 
     const [isLoadingCategories, setIsLoadingCategories] = useState(false);
     const [categories, setCategories] = useState<Category[]>([]);
+    const [uploadedImgUrl, setUploadedImgUrl] = useState('');
+    const [productImgUrl, setProductImgUrl] = useState('');
+
     const isEditing = productId !== 'create';
     const formTitle = isEditing ? 'Editar produto' : 'Adicionar produto';
 
@@ -45,8 +48,8 @@ const Form = () => {
                 setValue('name', response.data.name);
                 setValue('price', response.data.price);
                 setValue('description', response.data.description);
-                setValue('imgUrl', response.data.imgUrl);
                 setValue('categories', response.data.categories);
+                setProductImgUrl(response.data.imgUrl);
                 
             })
         }
@@ -65,10 +68,15 @@ const Form = () => {
 
     const onSubmit = (data: FormState) => {
 
+        const payload = {
+            ...data, 
+            imgUrl: uploadedImgUrl || productImgUrl
+        }
+
         makePrivateRequest({ 
             url: isEditing ? `/products/${productId}`  : '/products', 
             method: isEditing ? 'PUT' : 'POST', 
-            data 
+            data: payload 
         })
         .then( () => {
 
@@ -82,6 +90,11 @@ const Form = () => {
 
         });
 
+    }
+
+    const onUploadSuccess = (imgUrl: string) => {
+        
+        setUploadedImgUrl(imgUrl);
     }
 
     return (
@@ -175,7 +188,10 @@ const Form = () => {
 
                         <div className="margin-bottom-30">
                                 
-                            <ImageUpload />
+                            <ImageUpload 
+                                onUploadSuccess={onUploadSuccess} 
+                                productImgUrl={productImgUrl} 
+                            />
 
                         </div>
 
