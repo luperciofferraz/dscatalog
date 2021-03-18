@@ -17,6 +17,7 @@ const DescriptionField = ({ control }: Props) => (
 
         name="description"
         control={control}
+        defaultValue=""
         render={( { value, onChange }) => (
 
             <Editor
