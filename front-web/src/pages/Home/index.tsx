@@ -8,9 +8,9 @@ const Home = () => (
 
     <div className="home-container">
 
-        <div className="row home-content card-base border-radius-20">
+        <div className="home-content card-base border-radius-20">
 
-            <div className="col-6">
+            <div className="home-text">
 
                 <h1 className="text-title">
                     Conheça o melhor <br/> catálogo de produtos
@@ -22,7 +22,7 @@ const Home = () => (
 
                 </p>
                 
-                <Link to="/products">
+                <Link to="/products" className="start-search-btn">
                     <ButtonIcon text="inicie agora a sua busca" />
                 </Link>
                 
