@@ -2,6 +2,8 @@
 
     margin-bottom: 20px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: row;
 
     .product-currency {
 
@@ -20,6 +22,7 @@
 
     width: 100px;
     height: 100px;
+    margin: 0px 10px;
 
 }
 
@@ -28,5 +31,15 @@
     font-size: 18px;
     line-height: 25px;
     letter-spacing: -0.015em;
+
+}
+
+@media (max-width: 768px) {
+
+    .card-content {
+
+        margin-left: 10px;
+
+    }
 
 }
