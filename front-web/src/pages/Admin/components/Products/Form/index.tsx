@@ -120,7 +120,7 @@ const Form = () => {
                 title={formTitle}
             >
                 
-                <div className="row">
+                <div className="product-form-container">
                     
                     <div className="col-6">
                         
@@ -211,7 +211,7 @@ const Form = () => {
 
                     </div>
                     
-                    <div className="col-6">
+                    <div className="description-container">
                         
                         <DescriptionField 
                         

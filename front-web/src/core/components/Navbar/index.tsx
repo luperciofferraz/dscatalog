@@ -75,7 +75,17 @@ const Navbar = () => {
 
                                     currentUser && (
 
-                                        <a href="#logout" className="nav-link active d-inline" onClick = { () => setDrawerActive(false) }>
+                                        <a 
+                                            href="#logout" 
+                                            className="nav-link active d-inline" 
+                                            onClick={ (e) => {
+                               
+                                                setDrawerActive(false);
+                
+                                                handleLogout(e);
+                                        
+                                            } }
+                                        >
 
                                             {`LOGOUT - ${currentUser}`}
 
@@ -101,8 +111,14 @@ const Navbar = () => {
 
                                     <li>
 
-                                        <Link to="/auth/login" className="nav-link active" onClick = { () => setDrawerActive(false) } >
+                                        <Link 
+                                            to="/auth/login" 
+                                            className="nav-link active" 
+                                            onClick = { () => setDrawerActive(false) } 
+                                        >
+                                        
                                             LOGIN
+
                                         </Link>
 
                                     </li>
@@ -142,7 +158,10 @@ const Navbar = () => {
                 )}
 
                 {!currentUser && (
-                    <Link to="/auth/login" className="nav-link active" onClick = { () => setDrawerActive(false) } >
+                    <Link 
+                        to="/auth/login" 
+                        className="nav-link active" 
+                        onClick = { () => setDrawerActive(false) } >
                         LOGIN
                     </Link>
                 )}

@@ -46,29 +46,29 @@ const ProductDetails = () => {
                 </Link>
                 <div className="product-details-info">
 
-                    <div className="col-6 pr-5">
+                    <div className="product-image-price">
 
-                        {isLoading ? <ProductInfoLoader /> : (
-                            <>
+                    {isLoading ? <ProductInfoLoader /> : (
+                        <>
 
-                                <div className="product-details-card text-center">
+                            <div className="product-details-card text-center">
 
-                                    <img src={product?.imgUrl} alt={product?.name} className="product-details-image" />
+                                <img src={product?.imgUrl} alt={product?.name} className="product-details-image" />
 
-                                </div>
+                            </div>
 
-                                <div className="product-info-fields">
+                            <div className="product-info-fields">
 
-                                    <h1 className="product-details-name">
-                                        {product?.name}
-                                    </h1>
+                                <h1 className="product-details-name">
+                                    {product?.name}
+                                </h1>
 
-                                    {product?.price && <ProductPrice price={product?.price} />}
+                                {product?.price && <ProductPrice price={product?.price} />}
 
-                                </div>
-                                
-                            </>
-                        )}
+                            </div>
+                            
+                        </>
+                    )}
 
                     </div>
 
