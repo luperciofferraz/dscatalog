@@ -46,7 +46,7 @@ test('Should Render ProductPrice with price equals zero', () => {
 
 });
 
-test('Should Render ProductPrice without thousand separator', () => {
+it('Should Render ProductPrice without thousand separator', () => {
 
     
     //Arrange
