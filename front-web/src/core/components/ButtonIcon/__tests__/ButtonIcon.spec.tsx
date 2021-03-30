@@ -13,8 +13,7 @@ test('Should Render ButtonIcon', () => {
     )
 
     //Assert
-    const textElement = screen.getByText(text);
-
-    expect(textElement).toBeInTheDocument();
+    expect(screen.getByText(text)).toBeInTheDocument();
+    expect(screen.getByTestId('arrow-icon')).toBeInTheDocument();
 
 });
