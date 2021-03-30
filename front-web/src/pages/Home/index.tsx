@@ -30,7 +30,7 @@ const Home = () => (
 
             <div className="col-6">
 
-                <MainImage className="main-image" />
+                <MainImage className="main-image" data-testid="main-image" />
 
             </div>
 
