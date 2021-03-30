@@ -16,7 +16,7 @@ const Pagination = ({ totalPages, onChange }: Props) => {
 
         <ArrowIcon 
             className={`pagination-${type}`} 
-            data-testeid={`arrow-icon-${type}`}
+            data-testid={`arrow-icon-${type}`}
         />
 
     )
