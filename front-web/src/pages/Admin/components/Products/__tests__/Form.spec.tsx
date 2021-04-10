@@ -64,6 +64,4 @@ test('Should Render Form', async () => {
 
 //    expect(history.location.pathname).toBe('/admin/products');
 
-
-
 });
