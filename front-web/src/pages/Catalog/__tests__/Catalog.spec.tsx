@@ -19,7 +19,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close()); 
 
-test('Should Render ProductCard', async () => {
+test('Should Render Catalog', async () => {
 
     //Arrange
     

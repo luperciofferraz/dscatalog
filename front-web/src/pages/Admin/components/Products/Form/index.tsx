@@ -136,6 +136,7 @@ const Form = () => {
                                 type="text" 
                                 className="form-control input-base"
                                 placeholder="Nome do Produto"
+                                data-testid="name"
                             />
 
                             {errors.name && (
@@ -150,6 +151,8 @@ const Form = () => {
 
                         <div className="margin-bottom-30">
 
+                            <label htmlFor="categories" className="d-none">Categorias</label>
+                            
                             <Controller
                                 as={Select} 
                                 name="categories"
@@ -188,6 +191,7 @@ const Form = () => {
                                 type="number" 
                                 className="form-control input-base"
                                 placeholder="Preço"
+                                data-testid="price"
                             />
 
                             {errors.price && (
@@ -214,9 +218,7 @@ const Form = () => {
                     <div className="description-container">
                         
                         <DescriptionField 
-                        
                                 control={control}
-                        
                         />
 
                         {errors.description && (
